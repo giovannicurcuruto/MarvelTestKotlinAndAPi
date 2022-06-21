@@ -5,8 +5,12 @@ import android.os.Bundle
 import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import androidx.work.Data
 import com.example.marveltest.Models.Model
+import com.example.marveltest.Models.ModelMarvel
 import com.example.marveltest.Models.Posts
 import com.example.marveltest.Models.Result
 
@@ -19,6 +23,8 @@ import com.google.gson.Gson
 import com.google.gson.JsonObject
 import com.google.gson.internal.LinkedTreeMap
 import com.google.gson.reflect.TypeToken
+import com.squareup.moshi.JsonAdapter
+import com.squareup.moshi.Moshi
 import retrofit2.Call
 import retrofit2.Response
 import java.util.*
@@ -30,6 +36,10 @@ import com.google.gson.GsonBuilder as GsonGsonBuilder
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+
+    val mutableLiveData = MutableLiveData<List<Result>>()
+    val dataCharacter : LiveData<List<Result>> = mutableLiveData
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,46 +59,52 @@ class MainActivity : AppCompatActivity() {
         val endpoint = retrofitClient
             .create(ApiService::class.java)
 
-        val apiValue = Autenticator().setApiInfo()
+        //val apiValue = Autenticator().setApiInfo()
 
         val callback = endpoint
-            .getResult()
+            .getCharacters()
 
-        val mapType = object : TypeToken<Map<String, Any>>() {}.type
+        //val mapType = object : TypeToken<Map<String, Any>>() {}.type
 
-        callback.enqueue(object :  retrofit2.Callback<JsonObject>{
-            override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
+
+        callback.enqueue(object :  retrofit2.Callback<Model>{
+            override fun onResponse(call: Call<Model>, response: Response<Model>) {
+
                 println("foi")
-                //val json = """{"title": "Kotlin Tutorial", "author": "bezkoder", "categories" : ["Kotlin","Basic"]}"""
-                val gson1 = Gson()
-                var tutorialMap: Map<String, Any> = gson1.fromJson(response.body(), object : TypeToken<Map<String, Any>>() {}.type)
-                tutorialMap.forEach { println(it) }
+                println("debugg")
+                if(response.isSuccessful){
+                    val listItems: MutableList<ModelMarvel> = mutableListOf()
 
-             //   println("renan Deus")
+                    response.body()?.let { teste ->
+                        mutableLiveData.value = teste.responseData.responseResult
 
-                //println(tutorialMap.get("data"))
-                val mapadomapa: LinkedTreeMap<String,Any> = tutorialMap.get("data") as LinkedTreeMap<String, Any>
+                    }
+                    var aux: String? = null
+                    //val erroList: Result? = mutableLiveData.value?.get(10)
+                    val erroListComArray : List<Result>? = mutableLiveData.value
 
-               // println(mapadomapa.get("results"))
-               // println("renan Deus, é maior")
+                    for(result: Result in erroListComArray!!){
+                        println(result.description)
+                        aux += result.description + "\n"
 
-                val personagensMap: ArrayList<String> = mapadomapa.get("results") as ArrayList<String>
+                    }
 
-               // println("renan Deus, é maiorm, muito maior")
-              //  println(personagensMap.indexOf("id=1011334"))
+                    binding.textViewApi.text = aux
 
-                //println("renan Deus, é maiorm, muito maior, ta ficando bom")
-
-                val interadorQualquer = personagensMap.iterator()
-
-                while (interadorQualquer.hasNext()){
-                    println(interadorQualquer.next())
+                    println("chegamos aqui")
+                }else {
+                    println("Deu fezes")
+                    println("response.message()")
                 }
+
+
+
 
             }
 
-            override fun onFailure(call: Call<JsonObject>, t: Throwable) {
+            override fun onFailure(call: Call<Model>, t: Throwable) {
                 println("não foi")
+                println(t)
             }
 
 

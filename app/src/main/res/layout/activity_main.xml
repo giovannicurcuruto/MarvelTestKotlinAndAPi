@@ -64,10 +64,10 @@
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="48sp"
+        android:layout_height="wrap_content"
         android:id="@+id/textViewApi"
         android:layout_marginTop="8dp"
-        android:background="@color/white"
+        android:background="@color/black_background"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginStart="8dp"
