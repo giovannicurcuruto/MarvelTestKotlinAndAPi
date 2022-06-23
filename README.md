@@ -25,7 +25,7 @@ O exercicio solicitava que fosse feito um APP na linguagem Kotlin com as seguint
 Para realizar o design do APP foi realizado uma leve pesquisa com o intuito de tentar, possuir um visual bom esteticamente e usavel. 
 
 Foi utilizado como base a interface abaixo: 
-<imagem>
+![image1](https://user-images.githubusercontent.com/11502844/175203230-60ae3a6c-223c-46d9-85c3-cc5760ef3749.jpg)
 
 ## Status atual
 
