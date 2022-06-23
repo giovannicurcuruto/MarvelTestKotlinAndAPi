@@ -28,6 +28,7 @@ import com.google.gson.internal.LinkedTreeMap
 import com.google.gson.reflect.TypeToken
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
+import com.squareup.picasso.Picasso
 import retrofit2.Call
 import retrofit2.Response
 import java.util.*
@@ -161,6 +162,13 @@ class MainActivity : AppCompatActivity() {
     fun testBigString(){
 
         binding.textViewTest.text = "name of caracter:" + listOfName[0] + "\nDescription of caracter:"+ listOfDescripton[0] +"\n\nname of caracter: "+ listOfName[1] + "\nDescription of caracter:"+ listOfDescripton[1] + "\n\nname of caracter: "+ listOfName[2] + "\nDescription of caracter:"+ listOfDescripton[2] + "\n\nname of caracter: "+ listOfName[10] + "\nDescription of caracter:"+ listOfDescripton[10] + "\nThumb path of Caracter:" + listOfThumbnail[10]
+
+        Picasso.get()
+            .load(listOfThumbnail[5].toString())
+            .into(binding.imageViewTest)
+        println(listOfThumbnail[10].toString())
+
+
     }
 
 }
