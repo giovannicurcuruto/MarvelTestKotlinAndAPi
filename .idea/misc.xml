@@ -3,9 +3,13 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/Giovanni Curcuruto/Desktop/AVALIACAO/TESTAGAIN/MarvelTest/app/src/main/res/layout/activity_main.xml" value="0.16" />
+        <entry key="..\:/Users/Giovanni Curcuruto/Desktop/AVALIACAO/TESTAGAIN/MarvelTest/app/src/main/res/layout/activity_main.xml" value="0.22" />
+        <entry key="..\:/Users/Giovanni Curcuruto/Desktop/AVALIACAO/TESTAGAIN/MarvelTest/app/src/main/res/layout/fragment_description.xml" value="0.20364583333333333" />
+        <entry key="..\:/Users/Giovanni Curcuruto/Desktop/AVALIACAO/TESTAGAIN/MarvelTest/app/src/main/res/layout/fragment_list.xml" value="0.18697916666666667" />
         <entry key="..\:/Users/Giovanni Curcuruto/Desktop/AVALIACAO/TESTAGAIN/MarvelTest/app/src/main/res/layout/fragments_favs.xml" value="0.18697916666666667" />
         <entry key="..\:/Users/Giovanni Curcuruto/Desktop/AVALIACAO/TESTAGAIN/MarvelTest/app/src/main/res/layout/fragments_home.xml" value="0.18697916666666667" />
+        <entry key="..\:/Users/Giovanni Curcuruto/Desktop/AVALIACAO/TESTAGAIN/MarvelTest/app/src/main/res/layout/item_fragment.xml" value="0.33" />
+        <entry key="..\:/Users/Giovanni Curcuruto/Desktop/AVALIACAO/TESTAGAIN/MarvelTest/app/src/main/res/layout/item_list.xml" value="0.33" />
       </map>
     </option>
   </component>

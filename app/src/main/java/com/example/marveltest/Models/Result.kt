@@ -5,6 +5,7 @@ package com.example.marveltest.Models
 
 import com.squareup.moshi.Json;
 import com.squareup.moshi.JsonClass;
+import java.io.Serializable
 
 @JsonClass(generateAdapter = true)
 data class Result (
@@ -19,4 +20,4 @@ data class Result (
 
     @Json(name = "thumbnail")
     val thumbnail: Thumbnail
-)
+) : Serializable

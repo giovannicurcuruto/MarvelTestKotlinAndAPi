@@ -5,10 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity">
-
-
-
+    android:id="@+id/container_root"
+    tools:context=".MainActivity"
+    tools:ignore="ExtraText">
 
     <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
@@ -30,10 +29,27 @@
             />
 
     </androidx.appcompat.widget.Toolbar>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="615dp"
+        android:id="@+id/container_main">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="615dp"
+            android:id="@+id/textView_test"
+            />
+
+    </FrameLayout>
+
+
+
+
+
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/add_tabLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="53dp"
         android:background="@color/black_grey"
         android:contentDescription="@string/fav">
 
@@ -56,24 +72,8 @@
         android:id="@+id/add_viewpager"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
-
-
     </androidx.viewpager2.widget.ViewPager2>
 
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/textViewApi"
-        android:layout_marginTop="8dp"
-        android:background="@color/black_background"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginStart="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginEnd="8dp"
-        />
 
 </LinearLayout>
 

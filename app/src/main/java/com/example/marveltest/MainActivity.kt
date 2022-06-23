@@ -2,13 +2,16 @@ package com.example.marveltest
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import androidx.work.Data
+
 import com.example.marveltest.Models.Model
 import com.example.marveltest.Models.ModelMarvel
 import com.example.marveltest.Models.Posts
@@ -37,8 +40,17 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
+
+
     val mutableLiveData = MutableLiveData<List<Result>>()
     val dataCharacter : LiveData<List<Result>> = mutableLiveData
+
+    var listOfName : List<String> = emptyList()
+    var listOfID :  List<String> = emptyList()
+    var listOfThumbnail : List<String> = emptyList()
+    var listOfDescripton : List<String> = emptyList()
+
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -50,8 +62,8 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    fun getData(){
 
+    fun getData(){
 
         val retrofitClient = NetworkUtils
             .getRetrofitInstance()
@@ -59,51 +71,51 @@ class MainActivity : AppCompatActivity() {
         val endpoint = retrofitClient
             .create(ApiService::class.java)
 
-        //val apiValue = Autenticator().setApiInfo()
-
         val callback = endpoint
             .getCharacters()
-
-        //val mapType = object : TypeToken<Map<String, Any>>() {}.type
-
 
         callback.enqueue(object :  retrofit2.Callback<Model>{
             override fun onResponse(call: Call<Model>, response: Response<Model>) {
 
-                println("foi")
-                println("debugg")
                 if(response.isSuccessful){
                     val listItems: MutableList<ModelMarvel> = mutableListOf()
 
                     response.body()?.let { teste ->
                         mutableLiveData.value = teste.responseData.responseResult
-
                     }
                     var aux: String? = null
                     //val erroList: Result? = mutableLiveData.value?.get(10)
                     val erroListComArray : List<Result>? = mutableLiveData.value
-
+                  //  var listTest: List<String> = emptyList()
                     for(result: Result in erroListComArray!!){
-                        println(result.description)
+                        println(result.name)
+                        listOfName += result.name
+                        listOfID += result.id
+                        listOfThumbnail += result.thumbnail.path + "." + result.thumbnail.extension
+                        listOfDescripton += result.description
                         aux += result.description + "\n"
-
+                        //listTest += "name: " + listOfName +"\n" + "Description of " + listOfName + ":" + listOfDescripton + "\n"
                     }
 
-                    binding.textViewApi.text = aux
 
-                    println("chegamos aqui")
+
+                    testBigString()
+
+
+
+
+
+                    println("aqui")
+
+
+
                 }else {
-                    println("Deu fezes")
                     println("response.message()")
                 }
-
-
-
-
             }
 
             override fun onFailure(call: Call<Model>, t: Throwable) {
-                println("não foi")
+                println("Erro, erro:")
                 println(t)
             }
 
@@ -136,7 +148,9 @@ class MainActivity : AppCompatActivity() {
             return fragment[position]
         }
 
-        class HomeFragment : Fragment() {}
+        class HomeFragment : Fragment() {
+
+        }
 
         class ListFavFragment : Fragment() {}
 
@@ -144,6 +158,10 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    fun testBigString(){
+
+        binding.textViewTest.text = "name of caracter:" + listOfName[0] + "\nDescription of caracter:"+ listOfDescripton[0] +"\n\nname of caracter: "+ listOfName[1] + "\nDescription of caracter:"+ listOfDescripton[1] + "\n\nname of caracter: "+ listOfName[2] + "\nDescription of caracter:"+ listOfDescripton[2] + "\n\nname of caracter: "+ listOfName[10] + "\nDescription of caracter:"+ listOfDescripton[10] + "\nThumb path of Caracter:" + listOfThumbnail[10]
+    }
 
 }
 
